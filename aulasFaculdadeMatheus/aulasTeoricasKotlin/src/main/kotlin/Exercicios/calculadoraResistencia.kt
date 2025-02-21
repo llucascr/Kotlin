@@ -2,13 +2,16 @@ package Exercicios
 
 // Fazer em Kotlin puro, uma calculadora de resistores
 // 4 faixas
-// a tolerancia é a ultima cor
+// a tolerancia é a última cor
 // a do meio é o multipicador
 
 fun main() {
 
-    var faixa1 = getFaixas("marrom")
-    var faixa2 = getFaixas("preto")
+    instructions()
+//    var faixa1 = getFaixas("marrom")
+    var faixa1 = getFaixas(readln())
+//    var faixa2 = getFaixas("preto")
+    var faixa2 = getFaixas(readln())
 
     if (faixa1 == -1 || faixa2 == -1) {
         println("Cor usada somente na tolerancia e no multiplicador")
@@ -40,6 +43,11 @@ fun main() {
 
     println("Minimo: " + minimo)
     println("Maximo: " + maximo)
+}
+
+fun instructions() {
+    println(">>>>>> Calculadora de Resistores <<<<<<")
+    println("Informe as 4 cores separadas por virgula")
 }
 
 fun getFaixas(cor: String): Int {
