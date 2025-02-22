@@ -23,7 +23,6 @@ fun main() {
 
 fun comecaComOi(x: Any): Boolean {
     return when(x) {
-        is String -> x.startsWith("oi")
         else -> false
     }
 }
