@@ -8,10 +8,17 @@ package Exercicios
 fun main() {
 
     instructions()
-//    var faixa1 = getFaixas("marrom")
-    var faixa1 = getFaixas(readln())
-//    var faixa2 = getFaixas("preto")
-    var faixa2 = getFaixas(readln())
+
+    var colors = cleanResistorString(readln())
+
+    var resistorColors = cleanResistorString(colors).split(",")
+
+//    println(resistorColors)
+
+    var faixa1 = getFaixas(resistorColors[0])
+    var faixa2 = getFaixas(resistorColors[1])
+    var multiplicador = getMult(resistorColors[2])
+    var tolerancia = getTolerancia(resistorColors[3])
 
     if (faixa1 == -1 || faixa2 == -1) {
         println("Cor usada somente na tolerancia e no multiplicador")
@@ -20,14 +27,10 @@ fun main() {
 
     var faixa = "$faixa1$faixa2".toInt()
 
-    var multiplicador = getMult("vermelho")
-
     if (multiplicador == 0.0)  {
         println("Cor não utilizada nessa posição")
         return
     }
-
-    var tolerancia = getTolerancia("dourado")
 
     if (tolerancia == 0.0) {
         println("Cor não usada para mostrar tolerancia")
@@ -48,6 +51,10 @@ fun main() {
 fun instructions() {
     println(">>>>>> Calculadora de Resistores <<<<<<")
     println("Informe as 4 cores separadas por virgula")
+}
+
+fun cleanResistorString(s: String): String {
+    return s.replace(" ", "").uppercase()
 }
 
 fun getFaixas(cor: String): Int {
