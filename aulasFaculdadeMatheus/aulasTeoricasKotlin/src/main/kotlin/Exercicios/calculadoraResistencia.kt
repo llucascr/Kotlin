@@ -13,39 +13,18 @@ fun main() {
 
     var resistorColors = cleanResistorString(colors).split(",")
 
-//    println(resistorColors)
+    var faixa = "${getFaixas(resistorColors[0])}${getFaixas(resistorColors[1])}".toInt() // gambiarra
 
-    var faixa1 = getFaixas(resistorColors[0])
-    var faixa2 = getFaixas(resistorColors[1])
     var multiplicador = getMult(resistorColors[2])
+
     var tolerancia = getTolerancia(resistorColors[3])
 
-    if (faixa1 == -1 || faixa2 == -1) {
-        println("Cor usada somente na tolerancia e no multiplicador")
-        return
-    }
-
-    var faixa = "$faixa1$faixa2".toInt()
-
-    if (multiplicador == 0.0)  {
-        println("Cor não utilizada nessa posição")
-        return
-    }
-
-    if (tolerancia == 0.0) {
-        println("Cor não usada para mostrar tolerancia")
-        return
-    }
-
+//    println(resistencia)
 //    println(faixa)
 //    println(multiplicador)
 //    println(tolerancia)
 
-    var minimo = (faixa * multiplicador) - (tolerancia * 100 )
-    var maximo = (faixa * multiplicador) + (tolerancia * 100)
-
-    println("Minimo: " + minimo)
-    println("Maximo: " + maximo)
+    result(faixa, multiplicador, tolerancia)
 }
 
 fun instructions() {
@@ -54,59 +33,71 @@ fun instructions() {
 }
 
 fun cleanResistorString(s: String): String {
-    return s.replace(" ", "").uppercase()
+    return s.replace(" ", "").lowercase()
 }
 
-fun getFaixas(cor: String): Int {
-    var result = -1
-    when(cor.lowercase()) {
-        "preto" -> result = 0
-        "marrom" -> result = 1
-        "vermelho" -> result = 2
-        "laranja" -> result = 3
-        "amarelo" -> result = 4
-        "verde" -> result = 5
-        "azul" -> result = 6
-        "violeta" -> result = 7
-        "cinza" -> result = 8
-        "branco" -> result = 9
-        else -> println("cor invalida")
-    }
-    return result
+fun result(faixa: Int, multiplicador: Double?, tolerancia: Double?) {
+    var resistencia = faixa * multiplicador!!
+    println("Valor do resistor: \n$resistencia Ohms ${tolerancia!! * 10}%")
 }
 
-fun getMult(cor: String): Double {
-    var result: Double = 0.0
-    when(cor.lowercase()) {
-        "preto" -> result = 1.0
-        "marrom" -> result = 10.0
-        "vermelho" -> result = 100.0
-        "laranja" -> result = 1000.0
-        "amarelo" -> result = 10000.0
-        "verde" -> result = 100000.0
-        "azul" -> result = 1000000.0
-        "violeta" -> result = 10000000.0
-        "cinza" -> result = 100000000.0
-        "dourado" -> result = 0.1
-        "prateado" -> result = 0.01
-        else -> println("cor não registrada")
+fun getFaixas(cor: String): Int? {
+    val colorsResistors = mapOf(
+        "preto" to 0,
+        "marrom" to 1,
+        "vermelho" to 2,
+        "laranja" to 3,
+        "amarelo" to 4,
+        "verde" to 5,
+        "azul" to 6,
+        "violeta" to 7,
+        "cinza" to 8,
+        "branco" to 9,
+        )
+
+    if (!colorsResistors.containsKey(cor)) {
+        println("cor $cor não cadastrada")
+        return null
     }
-    return result
+    return colorsResistors.getValue(cor)
 }
 
-fun getTolerancia(cor: String): Double {
-    var result: Double = 0.0
-    when(cor.lowercase()) {
-        "marrom" -> result = 0.1
-        "vermelho" -> result = 0.2
-        "verde" -> result = 0.05
-        "azul" -> result = 0.025
-        "violeta" -> result = 0.1
-        "cinza" -> result = 0.005
-        "dourado" -> result = 0.5
-        "prateado" -> result = 0.10
-        else -> println("cor invalida")
+fun getMult(cor: String): Double? {
+    val colorsMult = mapOf(
+        "preto" to 1.0,
+        "marrom" to 10.0,
+        "vermelho" to 100.0,
+        "laranja" to 1000.0,
+        "amarelo" to 10000.0,
+        "verde" to 100000.0,
+        "azul" to 1000000.0,
+        "violeta" to 10000000.0,
+        "cinza" to 100000000.0,
+        "dourado" to 0.1,
+        "prateado" to 0.01,
+        "branco" to 1000000000.0
+    )
+    if (!colorsMult.containsKey(cor)) {
+        println("cor $cor não cadastrada")
+        return null
     }
-    return result
+    return colorsMult.getValue(cor)
+}
+
+fun getTolerancia(cor: String): Double? {
+    val colorsTolerance = mapOf(
+        "marrom" to 0.1,
+        "vermelho" to 0.2,
+        "verde" to 0.25,
+        "violeta" to 0.1,
+        "cinza" to 0.05,
+        "dourado" to 0.5,
+        "prateado" to 0.10
+    )
+    if (!colorsTolerance.containsKey(cor)) {
+        println("cor $cor não cadastrada")
+        return null
+    }
+    return colorsTolerance.getValue(cor)
 }
 
