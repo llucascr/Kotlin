@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1005318293404",
+    "project_id": "exfirebaseauthfirestore",
+    "storage_bucket": "exfirebaseauthfirestore.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005318293404:android:aa17e038645479f5b02a59",
+        "android_client_info": {
+          "package_name": "com.experimento.firebaseauthfirestore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdtDb3JO_Fsmclj-GrkJPFlMyvYogpNuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

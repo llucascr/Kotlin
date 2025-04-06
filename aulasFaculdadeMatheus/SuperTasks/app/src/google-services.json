@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "838507022695",
+    "project_id": "supertasks-24ae2",
+    "storage_bucket": "supertasks-24ae2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838507022695:android:29ce66cffe459cb031c7c2",
+        "android_client_info": {
+          "package_name": "com.example.supertasks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFJzCerdnyTgX9s45HT8uQNY0FMwOxpS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
