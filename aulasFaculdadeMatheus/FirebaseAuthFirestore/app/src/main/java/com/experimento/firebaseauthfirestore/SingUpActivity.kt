@@ -63,9 +63,9 @@ class SingUpActivity : ComponentActivity() {
         }
     }
 
-    private fun updateUI(user: User) {
-        
-    }
+//    private fun updateUI(user: User) {
+//
+//    }
 
     private fun creatAccount(email: String, senha: String) {
         auth.createUserWithEmailAndPassword(email, senha)
@@ -73,7 +73,7 @@ class SingUpActivity : ComponentActivity() {
                 if (task.isSuccessful) {
                     Log.d("AUTH-INFO", "createUserWithEmail:success")
                     val user = auth.currentUser
-                    updateUI(user)
+//                    updateUI(user)
                 } else {
                     Log.w("AUTH-INFO", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
@@ -81,7 +81,7 @@ class SingUpActivity : ComponentActivity() {
                         "Authentication failed.",
                         Toast.LENGTH_SHORT,
                     ).show()
-                    updateUI(null)
+//                    updateUI(null)
                 }
             }
     }
