@@ -86,6 +86,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         }
         Spacer(modifier = Modifier.size(16.dp))
         Text("Texto se no windows funciona")
+        Text("Voltar e atualizar no linux")
     }
     }
 

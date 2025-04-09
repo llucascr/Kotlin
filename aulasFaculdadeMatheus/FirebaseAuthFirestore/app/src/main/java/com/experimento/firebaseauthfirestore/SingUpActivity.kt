@@ -1,6 +1,8 @@
 package com.experimento.firebaseauthfirestore
 
+import android.content.ContentResolver
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -30,16 +32,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.experimento.firebaseauthfirestore.ui.theme.FirebaseAuthFirestoreTheme
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class SingUpActivity : ComponentActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         auth = Firebase.auth
+        db = Firebase.firestore
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -63,11 +70,32 @@ class SingUpActivity : ComponentActivity() {
         }
     }
 
+<<<<<<< Updated upstream
 //    private fun updateUI(user: User) {
 //
 //    }
+=======
+    private fun updateUser(nome: String, user: FirebaseUser?) {
+        if (user == null) return
 
-    private fun creatAccount(email: String, senha: String) {
+        var context: ContentResolver? = contentResolver
+        val androidId = Settings.Secure.getString(context, Settings.Secure.ANDROID_ID)
+
+        // salvar nome, email, UID, imei, validou email?
+        var userModel = hashMapOf(
+            "nome" to nome,
+            "email" to user.email,
+            "uid" to user.uid,
+            "ime" to androidId,
+            "validarEmail" to false
+        )
+
+        db.collection("").document("UID").set(userModel)
+
+    }
+>>>>>>> Stashed changes
+
+    public fun creatAccount(email: String, senha: String) {
         auth.createUserWithEmailAndPassword(email, senha)
             .addOnCompleteListener(this) {task ->
                 if (task.isSuccessful) {
@@ -95,6 +123,9 @@ fun Greeting3(name: String, modifier: Modifier = Modifier) {
     var senha by remember { mutableStateOf("") }
     var rg by remember { mutableStateOf("") }
     var cpf by remember { mutableStateOf("") }
+
+    val singUpActivity: SingUpActivity = SingUpActivity()
+
 
     Column (
         modifier = Modifier.fillMaxSize(),
@@ -136,7 +167,7 @@ fun Greeting3(name: String, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.size(12.dp))
         Button(
             onClick = {
-
+                singUpActivity.creatAccount(email, senha)
             }
         ) {
             Text(text = "Criar Minha Conta")
